@@ -1,0 +1,87 @@
+1️⃣ main.ts
+✅ نقاط القوة:
+
+بنية Electron سليمة: إنشاء BrowserWindow، تحميل URL أو ملف HTML حسب البيئة (isDev) ✔
+
+Preload + contextIsolation: جيد جدًا لعزل Node من Frontend ✔
+
+Logger متكامل: كل الأحداث الرئيسية (إنشاء النافذة، بدء scan) مسجلة ✔
+
+IPC handlers كاملة: لكل الموديولات (scan, hash, metadata, duplicates, safeTrash, batchRules, ai, settings, shell, app, system) ✔
+
+Progress Updates: كل عملية ترسل progress للواجهة عبر webContents.send ✔
+
+Store متكامل: electron-store للـ settings ✔
+
+⚠ نقاط يجب التحقق منها:
+
+File Scanner و Engines: يجب أن نتأكد أن:
+
+fileScanner.scanFolders فعليًا يقرأ الملفات من الهارد
+
+hashEngine.hashFile/hashFiles فعليًا يقرأ البايتس ويحسب SHA256
+
+metadataExtractor.extract/Batch يعالج الصور والفيديو والصوت فعليًا
+
+duplicateEngine يكتشف الملفات المكررة بناءً على محتوى حقيقي
+
+safeTrash.moveToTrash ينقل الملفات فعليًا إلى مجلد محمي وليس مجرد mock
+
+AI Engine: aiEngine.analyzeFiles يجب أن يكون متصل بنموذج حقيقي وليس dummy
+
+Batch Rules: التأكد أن applyRulesToGroups يطبق على الملفات فعليًا
+
+Error Handling: معظم الـ IPC handlers فيه try/catch لكن بعضهم (مثل AI و Trash) ليس فيه حماية كاملة
+
+🔹 استنتاج:
+
+main.ts جاهز لتشغيل Desktop كامل
+
+لكن يجب التأكد من الموديولات Core الحقيقية حتى نضمن أن كل شيء يعمل على الملفات الحقيقية
+
+2️⃣ preload.ts
+✅ نقاط القوة:
+
+contextBridge يستخدم electronAPI بشكل واضح
+
+كل الـ APIs من main.ts موجودة هنا
+
+دعم onProgress لكل الموديولات (scan, hash, metadata, duplicates, batch rules, ai) ✔
+
+Frontend يستطيع استدعاء كل وظائف Back-End مباشرة بدون الوصول المباشر لـ Node ✔
+
+⚠ نقاط يجب التحقق منها:
+
+نوع البيانات الممررة عبر IPC متطابقة مع ما يرسله main.ts
+
+إدارة إزالة الـ listeners (removeAllListeners) جيدة لتجنب memory leaks ✔
+
+لا يوجد وظائف Node مباشرة، كل شيء مرّر عبر IPC وهذا آمن ✔
+
+3️⃣ الخلاصة الهندسية العامة
+
+البنية العامة للـ Electron Desktop App ممتازة ✔
+
+جميع الوظائف موجودة على الورق في IPC + preload
+
+نقاط الاختبار الحقيقية:
+
+هل fileScanner, hashEngine, metadataExtractor, duplicateEngine, safeTrash, batchRules, aiEngine كلها متصلة فعليًا بالملفات على القرص؟
+
+هل الهاش والحذف والنسخ والتحليل يحدث فعليًا أم Mock؟
+
+✅ الخطوة التالية المقترحة:
+
+هات لي ملف واحد من Core Modules، الأفضل:
+
+electron/core/fileScanner.ts
+
+لمراجعة:
+
+هل هو يقوم بـ قراءة الهارد ديسك فعليًا
+
+هل يرسل progress حقيقي للـ frontend
+
+هل يهيئ FileInfo صحيح لكل ملف
+
+بعد ما نراجع fileScanner.ts، نقدر نحدد إذا المشروع Ultra-Max Desktop جاهز 100% أم يحتاج تكامل Core Engines.

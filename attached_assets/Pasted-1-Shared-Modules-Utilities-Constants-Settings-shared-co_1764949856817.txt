@@ -1,0 +1,206 @@
+1️⃣ Shared Modules (Utilities, Constants, Settings)
+shared/constants.ts
+export type FileType = "image" | "video" | "audio" | "document" | "other";
+
+export interface File {
+  path: string;
+  name: string;
+  type: FileType;
+  size: number;
+  modified: number;
+}
+
+export const FILE_ICONS: Record<FileType, string> = {
+  image: "assets/icons/image.png",
+  video: "assets/icons/video.png",
+  audio: "assets/icons/audio.png",
+  document: "assets/icons/document.png",
+  other: "assets/icons/other.png",
+};
+
+shared/utils.ts
+import fs from "fs";
+import path from "path";
+import { File } from "./constants";
+
+export function readDirRecursive(dir: string, fileList: File[] = []): File[] {
+  const files = fs.readdirSync(dir);
+  files.forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stats = fs.statSync(fullPath);
+    if (stats.isDirectory()) {
+      readDirRecursive(fullPath, fileList);
+    } else {
+      fileList.push({
+        path: fullPath,
+        name: file,
+        type: detectFileType(file),
+        size: stats.size,
+        modified: stats.mtimeMs,
+      });
+    }
+  });
+  return fileList;
+}
+
+export function detectFileType(filename: string) {
+  const ext = path.extname(filename).toLowerCase();
+  if ([".jpg", ".png", ".jpeg", ".gif"].includes(ext)) return "image";
+  if ([".mp4", ".avi", ".mkv"].includes(ext)) return "video";
+  if ([".mp3", ".wav"].includes(ext)) return "audio";
+  if ([".pdf", ".docx", ".xlsx", ".txt"].includes(ext)) return "document";
+  return "other";
+}
+
+export function moveToTrash(filePath: string) {
+  const trashDir = "H:\\KnouxDuplicateAI\\SafeTrash";
+  if (!fs.existsSync(trashDir)) fs.mkdirSync(trashDir, { recursive: true });
+  const fileName = path.basename(filePath);
+  fs.renameSync(filePath, path.join(trashDir, fileName));
+}
+
+shared/settingsManager.ts
+import fs from "fs";
+import path from "path";
+
+const SETTINGS_PATH = path.resolve("H:\\KnouxDuplicateAI\\config\\Settings.json");
+
+export function getSettings() {
+  if (!fs.existsSync(SETTINGS_PATH)) return {};
+  const raw = fs.readFileSync(SETTINGS_PATH, "utf-8");
+  return JSON.parse(raw);
+}
+
+export function updateSettings(key: string, value: any) {
+  const settings = getSettings();
+  settings[key] = value;
+  fs.writeFileSync(SETTINGS_PATH, JSON.stringify(settings, null, 2));
+}
+
+2️⃣ Backend Core Modules
+server/scanner.ts
+import { readDirRecursive } from "@shared/utils";
+import { getSettings } from "@shared/settingsManager";
+
+export function scanFiles() {
+  const settings = getSettings();
+  const results = settings.scan_paths.map((p: string) => readDirRecursive(p));
+  return results.flat();
+}
+
+server/duplicateEngine.ts
+import crypto from "crypto";
+import { File } from "@shared/constants";
+
+export function hashFile(filePath: string) {
+  const data = require("fs").readFileSync(filePath);
+  return crypto.createHash("sha256").update(data).digest("hex");
+}
+
+export function detectDuplicates(files: File[]) {
+  const hashMap: Record<string, File[]> = {};
+  files.forEach(file => {
+    const h = hashFile(file.path);
+    if (!hashMap[h]) hashMap[h] = [];
+    hashMap[h].push(file);
+  });
+  return Object.values(hashMap).filter(group => group.length > 1);
+}
+
+server/smartSuggest.ts
+import { File } from "@shared/constants";
+
+export function suggestKeep(files: File[]): File {
+  // Keep the largest and most recently modified file
+  return files.sort((a, b) => b.size - a.size || b.modified - a.modified)[0];
+}
+
+server/batchRules.ts
+import { File } from "@shared/constants";
+import { getSettings } from "@shared/settingsManager";
+import { moveToTrash } from "@shared/utils";
+
+export function applyBatchRules(duplicateGroups: File[][]) {
+  const rules = getSettings().auto_delete_rules || [];
+  duplicateGroups.forEach(group => {
+    rules.forEach((rule: any) => {
+      group.forEach(file => {
+        if (file.type === rule.type && rule.keep === "latest") {
+          const keepFile = group.sort((a, b) => b.modified - a.modified)[0];
+          group.forEach(f => { if(f.path !== keepFile.path) moveToTrash(f.path); });
+        }
+        if (file.type === rule.type && rule.keep === "highest_quality") {
+          const keepFile = group.sort((a, b) => b.size - a.size)[0];
+          group.forEach(f => { if(f.path !== keepFile.path) moveToTrash(f.path); });
+        }
+      });
+    });
+  });
+}
+
+server/safeTrash.ts
+import fs from "fs";
+import path from "path";
+
+const TRASH_DIR = "H:\\KnouxDuplicateAI\\SafeTrash";
+
+export function restoreFile(filename: string) {
+  const fullPath = path.join(TRASH_DIR, filename);
+  if (!fs.existsSync(fullPath)) return false;
+  const originalPath = path.resolve("H:\\KnouxDuplicateAI\\Files", filename);
+  fs.renameSync(fullPath, originalPath);
+  return true;
+}
+
+server/logger.ts
+import fs from "fs";
+import path from "path";
+
+const LOG_DIR = "H:\\KnouxDuplicateAI\\logs";
+if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR);
+
+export function log(action: string, message: string) {
+  const file = path.join(LOG_DIR, `${new Date().toISOString().split("T")[0]}.log`);
+  fs.appendFileSync(file, `[${new Date().toISOString()}] [${action}] ${message}\n`);
+}
+
+server/previewEngine.ts
+import fs from "fs";
+import path from "path";
+import sharp from "sharp";
+
+export function generateThumbnail(filePath: string, outputDir: string) {
+  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+  const fileName = path.basename(filePath);
+  const thumbPath = path.join(outputDir, fileName);
+  sharp(filePath).resize(200).toFile(thumbPath);
+  return thumbPath;
+}
+
+server/node-build.ts (Entry Point)
+import express from "express";
+import cors from "cors";
+import { scanFiles } from "./scanner";
+import { detectDuplicates } from "./duplicateEngine";
+import { suggestKeep } from "./smartSuggest";
+import { applyBatchRules } from "./batchRules";
+import { generateThumbnail } from "./previewEngine";
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get("/scan", (req, res) => {
+  const files = scanFiles();
+  const duplicates = detectDuplicates(files);
+  res.json({ files, duplicates });
+});
+
+app.post("/apply-rules", (req, res) => {
+  const files = scanFiles();
+  const duplicates = detectDuplicates(files);
+  applyBatchRules(duplicates);
+  res.json({ status: "rules applied" });
+});
+
+app.listen(3000, () => console.log("Knoux Duplicate AI Backend running on port 3000"));

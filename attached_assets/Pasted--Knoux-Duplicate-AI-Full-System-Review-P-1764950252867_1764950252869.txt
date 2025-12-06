@@ -1,0 +1,86 @@
+# =====================================================
+# Knoux Duplicate AI – Full System Review Prompt
+# =====================================================
+Title: Knoux Duplicate AI – Complete Functionality Verification
+
+Description:
+Review and verify every detail of the Knoux Duplicate AI Desktop Application. 
+Ensure the application works fully offline, supports Arabic as the main language, and that all features, services, and backend modules are functional with no placeholders or missing parts.
+
+# =====================================================
+# Tasks
+# =====================================================
+
+1️⃣ **Interface & UX**
+- Verify Splash Screen displays Knoux logo with tagline in Arabic: "الذكاء في التنظيم، لا للتكرار".
+- Ensure Onboarding screens guide the user to select folders, file types, and explain AI-based duplicate suggestions.
+- Confirm Dashboard shows:
+  - Total Files (مجموع الملفات)
+  - Duplicates Found (الملفات المكررة)
+  - Storage Efficiency (الكفاءة التخزينية)
+  - File Type Distribution (توزيع الملفات حسب النوع)
+- Test Dark & Light Mode toggling works properly.
+- Ensure buttons, panels, and hover effects are functional and smooth.
+- Verify Drag & Drop works for folders and files.
+
+2️⃣ **Scan Engine**
+- Test scanning of all folders and file types (Images, Videos, Audio, Documents).
+- Confirm duplicates are detected correctly (hash-based + AI content recognition).
+- Ensure the "Scan Now" button triggers a full scan.
+- Check that duplicate heatmap displays correct folder density.
+
+3️⃣ **Duplicate Management**
+- Verify Smart Groups show duplicates correctly with thumbnails or names.
+- Test Preview & Compare:
+  - Images: side-by-side, quality comparison
+  - Videos: playable preview
+  - Documents: text summary from AI
+- Confirm Safe Delete / Knoux Trash functionality works:
+  - Files moved to trash
+  - Restorable if needed
+
+4️⃣ **Rules & Batch Actions**
+- Test creation of rules for automatic deletion or retention:
+  - Keep highest quality image
+  - Keep latest document
+- Apply rules to specific groups and all duplicates.
+- Ensure Drag & Drop rule setup is functional.
+
+5️⃣ **Settings & Configuration**
+- Verify Settings.json file is read and applied correctly:
+  - scan_paths
+  - file_types
+  - ai_sensitivity
+  - auto_delete_rules
+  - dark_mode
+  - theme_colors
+- Test modifying settings updates the application behavior immediately.
+
+6️⃣ **Backend & Modules**
+- Confirm File Scanner module works for all supported file types.
+- Verify Duplicate Detection Engine identifies duplicates correctly.
+- Test Smart Suggestion Engine selects best versions correctly.
+- Ensure Safe Trash module operates offline.
+- Confirm AI Summarizer produces correct document summaries.
+- Verify Version Detection correctly identifies older and newer versions.
+
+7️⃣ **Full System Testing**
+- Test end-to-end workflow:
+  1. Open application → Splash → Dashboard
+  2. Select folders and scan
+  3. Review duplicates and smart suggestions
+  4. Apply rules / delete / move to trash
+  5. Adjust settings and re-scan
+- Ensure all statistics (Total Files, Duplicates Found, Storage Efficiency) update correctly in Arabic.
+- Confirm offline operation works without any internet connectivity.
+
+# =====================================================
+# Emphasize Execution
+# =====================================================
+⚠️ The AI Builder or reviewer must:
+- Test **every feature fully**.
+- Ensure **no placeholders, missing modules, or dummy content** exist.
+- Confirm **Arabic language is applied everywhere**.
+- Validate **all backend modules**, file handling, AI engines, and UI.
+- Verify offline functionality.
+- Report or fix **any missing functionality** immediately.

@@ -1,0 +1,309 @@
+🔥 1. الهدف العام
+
+اريدك أن تنشئ لي تطبيق Knoux Duplicate Cleaner – Desktop Version (Electron + Node.js) يعمل فعليًا على نظام Windows كتطبيق سطح مكتب كامل وليس مشروع ويب.
+
+التطبيق يجب أن:
+
+يقرأ الملفات الحقيقية من الهارد
+
+يحسب الهاش الحقيقي SHA256
+
+يحلل الصور والفيديو والصوت والوثائق
+
+يكتشف الملفات المكررة بدقة عالية
+
+يطبق قواعد Batch Rules على ملفات حقيقية
+
+ينقل الملفات إلى Safe Trash حقيقية على نظام ويندوز
+
+يستخدم IPC كامل بين React UI و Node backend
+
+يحتوي على جميع Services التالية:
+
+🔥 2. الخدمات المطلوبة (جميع الخدمات – Ultra Complete List)
+✔ Dashboard Services
+
+حساب عدد الملفات الحقيقي
+
+حساب عدد المكرر
+
+حساب المساحة التي يمكن استعادتها
+
+توزيع الملفات حسب النوع
+
+عرض إحصائيات مباشرة مستخرجة من الفحص
+
+تحديث لحظي Live Stats من خلال IPC
+
+✔ Scan Services (Full Engine)
+
+FileScanner
+
+read folder recursive
+
+fs.readdirSync
+
+fs.statSync
+
+detect file type via mime
+
+extract metadata (size, created, modified)
+
+HashEngine
+
+hashing عبر SHA256
+
+crypto.createHash("sha256").update(buffer).digest("hex")
+
+Metadata Extractor
+
+sharp → width, height, format
+
+ffprobe → duration, resolution, bitrate
+
+pdf-lib → pages
+
+music-metadata → audio metadata
+
+DuplicateEngine
+
+compare hashes
+
+compare sizes
+
+compare binary content
+
+Scan Reports
+
+save as JSON
+
+progressive scan events
+
+resumable scan
+
+✔ AI Services
+
+AI Smart Duplicate Detection
+
+AI Image Similarity (via OpenCL or Tensorflow-lite)
+
+AI Decision Recommendation (keep_largest / keep_best_quality / keep_newest / custom)
+
+AI-powered Summary of scan results
+
+AI safety-check قبل الحذف
+
+AI Confidence score لكل مجموعة مكررة
+
+✔ Batch Rules Engine
+
+Rules include:
+
+keep_largest
+
+keep_newest
+
+keep_best_quality
+
+keep_smallest
+
+custom regex
+
+priority directories
+
+skip protected folders
+
+safe-delete mode
+
+auto-tag duplicates
+
+Each rule must operate on real files from disk using:
+
+fs.statSync(file.path).size
+
+✔ Settings Services
+
+theme/config save to
+%APPDATA%/Knoux/config.json
+
+selected scan folders
+
+allowed file types
+
+performance limit
+
+CPU/GPU acceleration toggle
+
+AI modes (low/mid/high)
+
+✔ Safe Trash System
+
+Trash folder path:
+
+C:\Users\<USER>\AppData\Roaming\Knoux\Trash
+
+
+Operations:
+
+Move instead of delete:
+fs.renameSync(src, trashPath)
+
+Auto-clean rules
+
+Restore file
+
+verify hash after move
+
+ensure ACL permissions
+
+✔ Backend Files (Complete List)
+
+يجب بناء backend بهذه الملفات:
+
+/backend
+  /core
+    fileScanner.js
+    hashEngine.js
+    metadataExtractor.js
+    duplicateEngine.js
+    aiEngine.js
+    rulesEngine.js
+    safeTrash.js
+    previewEngine.js
+    logger.js
+  /ipc
+    scanIPCRoutes.js
+    rulesIPCRoutes.js
+    trashIPCRoutes.js
+    dashboardIPCRoutes.js
+    settingsIPCRoutes.js
+  /utils
+    fileTypes.js
+    pathTools.js
+    config.js
+    store.js
+/main
+  electron.js
+  ipcBridge.js
+/config
+  appConfig.json
+
+🔥 3. Ultra‑Level Examples لكل وظيفة
+📁 3.1 Example: Real FS Scan
+import fs from "fs";
+import path from "path";
+
+export function scanFolder(folder) {
+  const files = [];
+
+  for (const item of fs.readdirSync(folder)) {
+    const full = path.join(folder, item);
+    const stat = fs.statSync(full);
+
+    if (stat.isDirectory()) {
+      files.push(...scanFolder(full));
+    } else {
+      files.push({
+        path: full,
+        size: stat.size,
+        ext: path.extname(full),
+        created: stat.birthtimeMs,
+        modified: stat.mtimeMs,
+      });
+    }
+  }
+
+  return files;
+}
+
+🔐 3.2 Example: Real Hash Engine
+import fs from "fs";
+import crypto from "crypto";
+
+export function hashFile(path) {
+  const buffer = fs.readFileSync(path);
+  return crypto.createHash("sha256").update(buffer).digest("hex");
+}
+
+📊 3.3 Example: Extract Image Metadata
+import sharp from "sharp";
+
+export async function getImageInfo(path) {
+  const data = await sharp(path).metadata();
+  return {
+    width: data.width,
+    height: data.height,
+    format: data.format,
+  };
+}
+
+🎥 3.4 Example: Extract Video Metadata
+import ffprobe from "ffprobe";
+import ffprobeStatic from "ffprobe-static";
+
+export function getVideoInfo(path) {
+  return ffprobe(path, { path: ffprobeStatic.path });
+}
+
+🗑 3.5 Example: Safe Trash
+export function moveToTrash(path) {
+  const trash = `${process.env.APPDATA}/Knoux/Trash`;
+  if (!fs.existsSync(trash)) fs.mkdirSync(trash, { recursive: true });
+
+  const dest = trash + "/" + path.split("\\").pop();
+  fs.renameSync(path, dest);
+
+  return dest;
+}
+
+⚙ 3.6 Example: Batch Rule – keep_largest
+export function ruleKeepLargest(files) {
+  const largest = files.reduce((a, b) => (a.size > b.size ? a : b));
+  return {
+    keep: largest,
+    remove: files.filter(f => f !== largest),
+  };
+}
+
+🔌 3.7 Example: IPC Route (scan)
+ipcMain.handle("scan:start", async (_, folders) => {
+  return await FileScanner.start(folders);
+});
+
+🔥 4. Folder Structure for the Builder (Ultra Complete)
+/Knoux-Duplicate-Cleaner
+  /app
+    /renderer
+      /components
+      /pages
+      /hooks
+      /context
+      /ui
+    /backend (Node.js real engine)
+      /core
+      /ipc
+      /utils
+    electron.js
+  /assets
+  /config
+  package.json
+  vite.config.js
+  electron-builder.yml
+
+🔥 5. Packaging Requirements (Very Important)
+
+عند البناء:
+
+produce .exe via electron-builder
+
+include node binaries
+
+allow fs, hashing, ffprobe, sharp
+
+include ffprobe binary
+
+include AI model files (local)
+
+set app id: com.knoux.duplicatecleaner
+
+icon from Knoux branding

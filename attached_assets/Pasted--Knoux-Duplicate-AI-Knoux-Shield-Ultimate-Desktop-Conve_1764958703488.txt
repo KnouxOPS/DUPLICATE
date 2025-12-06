@@ -1,0 +1,322 @@
+🚨 Knoux Duplicate AI / Knoux Shield – Ultimate Desktop Conversion Request
+
+Objective:
+Convert the current Knoux Duplicate AI web-based project into a fully native Windows Desktop Application (EXE) with complete system-level capabilities. All mock or placeholder functions must be replaced with real file system operations, hashing, analysis, Safe Trash, batch rules, and AI logic. The final deliverable must be production-ready, fully tested, and fully functional on any Windows laptop without dependency on web simulation.
+
+1️⃣ General Requirements
+
+Convert entire app (UI + backend logic) to a native desktop app using Electron + Node.js backend or Python + PyInstaller.
+
+Ensure all existing logic, services, engines, rules, and UI components are retained but connected to real OS-level functions.
+
+Implement local filesystem access, including:
+
+Reading directories recursively
+
+Reading file contents
+
+Hashing files
+
+Moving files
+
+Creating, deleting, renaming folders
+
+Integrate Safe Trash as a secure, isolated folder with restore and secure deletion options.
+
+Implement Batch Rules engine to process files automatically using real metadata.
+
+Add real-time dashboard updates showing scan progress, duplicates found, and system stats.
+
+Ensure multi-threading or asynchronous scanning for optimal performance.
+
+Include logging for all file operations, rules execution, AI decisions, and errors.
+
+Implement installer and auto-update system.
+
+Ensure production-ready EXE and background services.
+
+2️⃣ Desktop Features (Mandatory)
+Dashboard
+
+Real-time system status and scan progress
+
+Last scan summary
+
+Threats and duplicates detected
+
+Resource usage (CPU, RAM)
+
+Engine health check
+
+Scan Engine
+
+Quick Scan, Deep Scan (full disk + registry), Custom Scan (folder)
+
+Memory scan
+
+Hash comparison (SHA-256)
+
+YARA rules support
+
+Backdoor detection
+
+Spyware detection
+
+File-by-file logging
+
+Real-time notifications in UI
+
+AI Engine
+
+Local AI threat classification
+
+Behavioral analysis and smart false-positive reduction
+
+File reputation system
+
+Real-time decision-making on duplicates
+
+Optional cloud fallback (for learning and model update)
+
+JSON output of AI decisions
+
+Rules & Batch
+
+Apply IF/ELSE rules to real files
+
+Hash allow-list / block-list
+
+File patterns (extension, size, entropy)
+
+Scheduled batch scanning
+
+Automatic quarantine (Safe Trash)
+
+Integration with Safe Trash for auto-delete or restore
+
+Rule editor accessible from UI
+
+Safe Trash
+
+Isolated directory in AppData
+
+Encrypted storage (AES-256)
+
+Restore capability
+
+Auto deletion after retention period
+
+Collision handling (auto-rename)
+
+Logging of all trash actions
+
+Prevent access from other apps/users
+
+Settings
+
+Real-time protection toggle
+
+Startup behavior (run at Windows startup)
+
+Network protection toggle
+
+Hash database refresh
+
+Backup/restore app settings
+
+Theme selection
+
+AI sensitivity adjustment
+
+System Services
+
+Background scanning service (KnouxCore.exe)
+
+Real-time file watcher
+
+Auto-updater service
+
+Crash recovery
+
+Log manager
+
+Resource monitoring
+
+3️⃣ File System & Security Requirements
+
+Access Windows filesystem securely and efficiently
+
+SHA-256 hashing for all scanned files
+
+Build and maintain local hash database for whitelist/blacklist
+
+Isolate Safe Trash folder with restricted permissions
+
+Multi-threaded scanning for high-performance
+
+Lock files during scanning to avoid conflicts
+
+Store all logs encrypted
+
+Perform byte-by-byte file comparison for duplicates
+
+Include metadata extraction for:
+
+Images (dimensions, EXIF, DPI)
+
+Video/Audio (codec, bitrate, duration, framerate)
+
+Documents (pages, word count, author, size)
+
+4️⃣ Example Use Cases (Mandatory Demonstrations)
+File Hashing
+
+Compute SHA-256 hash for every file scanned
+
+Compare against local hash DB
+
+Detect changes since last scan
+
+Update Dashboard with real statistics
+
+Deep Scan
+
+Enumerate all drives and directories
+
+Scan registry hives
+
+Analyze startup entries
+
+Detect suspicious files (executables, scripts, temp files)
+
+Log each scanned file with metadata
+
+AI Engine
+
+Send file features (size, hash, entropy, resolution, codec) to AI model
+
+Predict duplicate or risk level
+
+Generate JSON decision output
+
+Update rules engine for automated action
+
+Safe Trash
+
+Move suspicious or duplicate file to Safe Trash
+
+Restrict permissions
+
+Encrypt file storage
+
+Allow restore to original location
+
+Automatically delete after user-defined retention
+
+Rules Engine
+
+Apply rules on real files:
+
+IF file_hash in blacklist → quarantine
+
+IF file_extension = .exe AND suspicious → send to AI
+
+IF file_size > 0 AND entropy > 7.5 → mark as high-risk
+
+Keep_largest / Keep_newest / Keep_best_quality (images/videos/documents)
+
+5️⃣ Desktop Integration (Electron + Node.js)
+
+Build Electron main process to run backend engine
+
+Preload.js for secure IPC between frontend and backend
+
+UI communicates via IPC channels for real-time scan data
+
+Node.js modules for FS, crypto, image/video/audio analysis
+
+Production build generates EXE installer with all dependencies
+
+Include auto-update system for app and engines
+
+6️⃣ Build & Packaging
+
+KnouxDuplicateAI.exe → main launcher
+
+KnouxCore.exe → background scanning and AI service
+
+KnouxAI.exe → AI engine assistant
+
+MSI or EXE installer
+
+Signed executables (placeholder certificate allowed)
+
+Clean folder structure ready for deployment
+
+Debug + Release builds
+
+7️⃣ Final Deliverables
+
+Fully working Windows desktop application
+
+Real file analysis engine
+
+Real Safe Trash implementation
+
+Rules engine fully functional
+
+AI engine fully functional
+
+Metadata extraction (images/videos/audio/documents)
+
+SHA-256 hashing engine
+
+Byte-level duplicate detection
+
+Real-time dashboard updates
+
+Installer and auto-updater
+
+Complete documentation for running, rebuilding, and extending
+
+Full source code with all modules connected
+
+Logging system
+
+Optimized performance and multi-threading
+
+8️⃣ IMPORTANT NOTES
+
+This MUST be fully functional on Windows, reading real files, hashing, analyzing, applying rules, moving files to Safe Trash, restoring files, generating previews.
+
+The current UI and logic cannot run as EXE without this real engine.
+
+No placeholders, mocks, or simulated scans allowed.
+
+Builder must verify every module, every page, every service, and connect them to real backend.
+
+Performance, security, and reliability must be production-ready.
+
+AI engine should be local-first, offline-capable, with optional online enhancements.
+
+System services must run in the background and resume after reboot.
+
+9️⃣ Optional Enhancements (Recommended)
+
+Real-time file system watcher for live duplicate detection
+
+Integration with Windows context menu (right-click scan)
+
+Configurable batch rules scheduler
+
+User-configurable Safe Trash retention policies
+
+Multi-user support with isolated profiles
+
+Configurable logging level
+
+Resource optimization for large drives
+
+✅ Conclusion:
+This request forces the Builder to implement a 100% real desktop application, not a web simulation.
+The result must be Knoux Duplicate AI / Knoux Shield EXE ready to scan, hash, analyze, move, and manage real files with AI-assisted rules and Safe Trash.

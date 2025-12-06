@@ -1,0 +1,147 @@
+🟣 Knoux Duplicate – Full UI/UX Enhancement & Build Plan
+1️⃣ Compatibility & File Integrity
+
+تحقق من جميع الملفات الموجودة: JS, TS, React Components, Assets.
+
+تأكد أن كل dependencies متوافقة ولا يوجد تعارضات.
+
+تحقق من:
+
+package.json
+
+pnpm-lock.yaml
+
+node_modules
+
+تحقق من عمل كل خدمة أو مكون موجود بشكل فردي ثم مدمج مع باقي الخدمات.
+
+هدف: أي EXE يبنى يجب أن يعكس المشروع الحالي بالكامل مع التحسينات.
+
+2️⃣ Project Setup & Build Automation
+
+إيقاف أي عملية dev تعمل حاليًا.
+
+تنظيف ملفات الكاش أو المؤقتة بدون حذف الملفات المصدرية.
+
+التحقق والتثبيت التلقائي:
+
+Node.js + npm + pnpm.
+
+الموافقة على build scripts لجميع dependencies: @swc/core, electron, sharp وغيرها.
+
+تثبيت كل dependencies باستخدام pnpm.
+
+تشغيل dev mode للتأكد من عمل كل الوظائف.
+
+بناء EXE باستخدام electron-builder.
+
+كل شيء يعمل تلقائيًا بدون تدخل المستخدم.
+
+3️⃣ UI/UX Enhancements
+Splash Screen (Animated & Premium)
+
+يظهر فور تشغيل التطبيق قبل الوصول للواجهة الرئيسية.
+
+حركة سلسة للشعار أو عنصر بصري يمثل هوية التطبيق:
+
+Fade-in + Zoom أو Rotation بسيط.
+
+مدة 2-4 ثواني.
+
+يمكن تخطيه عند الحاجة.
+
+خلفية متناسقة مع الهوية البصرية:
+
+Gradient أنيق أو خلفية متحركة خفيفة (جسيمات، خطوط متحركة).
+
+الهدف: الانطباع الأول يكون فخم وجذاب.
+
+Main Interface
+
+المحافظة على layout الحالي مع تحسينات:
+
+ألوان متناسقة مع هوية فاخرة (أرجواني + أسود/رمادي).
+
+خطوط واضحة وعناوين بارزة، نصوص ثانوية مقروءة.
+
+Grid أو Panels منظمة لتسهيل الوصول للميزات.
+
+Buttons كبيرة وواضحة مع أيقونات مرئية.
+
+Top Bar أو Side Menu متحركة عند hover أو click باستخدام Framer Motion.
+
+Transitions سلسة بين الصفحات: Fade + Slide Animations.
+
+Optional: Dark / Light Mode toggle.
+
+Effects:
+
+Shadow / Glow للأزرار والنوافذ.
+
+Micro-interactions عند الضغط أو التمرير (hover, ripple effects).
+
+4️⃣ Feature Verification
+
+اختبار كل ميزة موجودة بشكل فردي.
+
+التحقق من التكامل بين الميزات.
+
+التأكد من أن main & renderer processes تعمل بشكل صحيح.
+
+التحقق من كل APIs, AI services, multimedia features.
+
+التأكد أن EXE النهائي يعمل بالكامل بدون أخطاء.
+
+5️⃣ Contact Page (Enhanced)
+
+إضافة صفحة Contact جديدة دون التأثير على الصفحات الأخرى.
+
+التفاصيل:
+
+Eng / Sadek elgazar
+
+Tel & WhatsApp: +971503281920
+
+Email: knouxops@gmail.com
+
+Features:
+
+أيقونات لكل طريقة تواصل.
+
+WhatsApp link يفتح المحادثة مباشرة.
+
+Email link يفتح البريد الافتراضي.
+
+تصميم متناسق مع الثيم الفاخر.
+
+Subtle animation عند الضغط على الروابط.
+
+6️⃣ Final Checks & Deployment
+
+التأكد من وجود EXE في مجلد dist.
+
+اختبار Splash Screen وأنيميشناتها.
+
+اختبار جميع الميزات في EXE النهائي.
+
+اختبار Contact page links والأيقونات.
+
+التأكد من عدم وجود ملفات ناقصة أو أخطاء.
+
+الحفاظ على كل الوظائف الحالية، لا إزالة أي ميزة موجودة.
+
+7️⃣ Developer / AI Instructions
+
+العمل فقط على المشروع الحالي، لا إنشاء مشروع جديد.
+
+تطبيق Splash Screen متحركة فاخرة.
+
+تحسين واجهة المستخدم وتجربة المستخدم.
+
+إضافة صفحة Contact مع أيقونات وروابط عملية.
+
+التحقق من كل ميزة فردية ومتداخلة.
+
+بناء EXE تلقائيًا يعكس كل التحسينات.
+
+الهدف النهائي: EXE جاهز للتشغيل، واجهة فاخرة، تجربة مستخدم سلسة، كل شيء يعمل بشكل متكامل.

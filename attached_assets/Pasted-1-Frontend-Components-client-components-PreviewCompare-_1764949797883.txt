@@ -1,0 +1,136 @@
+1️⃣ Frontend – Components مكملة
+client/components/PreviewCompare.tsx
+import { useState } from "react";
+import { File } from "@shared/constants";
+import { moveToTrash } from "@shared/utils";
+
+export default function PreviewCompare({ files }: { files: File[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const file = files[currentIndex];
+
+  const next = () => setCurrentIndex((i) => (i + 1) % files.length);
+  const prev = () => setCurrentIndex((i) => (i - 1 + files.length) % files.length);
+
+  return (
+    <div className="p-4 border rounded shadow">
+      <h2 className="font-bold mb-2">{file.name}</h2>
+      {file.name.match(/\.(jpg|png)$/i) && <img src={`file://${file.path}`} alt={file.name} className="w-full mb-2" />}
+      <div className="flex gap-2 mt-2">
+        <button className="bg-green-500 p-1 text-white rounded">Keep</button>
+        <button className="bg-red-500 p-1 text-white rounded" onClick={() => moveToTrash(file.path)}>Delete</button>
+      </div>
+      <div className="flex justify-between mt-2">
+        <button onClick={prev} className="p-1 border rounded">Prev</button>
+        <button onClick={next} className="p-1 border rounded">Next</button>
+      </div>
+    </div>
+  );
+}
+
+client/components/RulesPanel.tsx
+import { useState } from "react";
+import { updateSettings, getSettings } from "@shared/settingsManager";
+
+export default function RulesPanel() {
+  const settings = getSettings();
+  const [rules, setRules] = useState(settings.auto_delete_rules || []);
+
+  const addRule = () => setRules([...rules, { type: "image", keep: "latest" }]);
+  const saveRules = () => updateSettings("auto_delete_rules", rules);
+
+  return (
+    <div className="p-4">
+      <h2 className="font-bold mb-2">Batch Rules</h2>
+      {rules.map((r, i) => (
+        <div key={i} className="flex gap-2 mb-2">
+          <input value={r.type} onChange={e => { r.type = e.target.value; setRules([...rules]); }} className="border p-1 rounded" />
+          <input value={r.keep} onChange={e => { r.keep = e.target.value; setRules([...rules]); }} className="border p-1 rounded" />
+        </div>
+      ))}
+      <div className="flex gap-2 mt-2">
+        <button onClick={addRule} className="bg-blue-500 text-white p-2 rounded">Add Rule</button>
+        <button onClick={saveRules} className="bg-green-500 text-white p-2 rounded">Save Rules</button>
+      </div>
+    </div>
+  );
+}
+
+client/components/SettingsPanel.tsx
+import { getSettings, updateSettings } from "@shared/settingsManager";
+import { useState } from "react";
+
+export default function SettingsPanel() {
+  const settings = getSettings();
+  const [darkMode, setDarkMode] = useState(settings.dark_mode || true);
+  const [aiSensitivity, setAiSensitivity] = useState(settings.ai_sensitivity || "high");
+
+  const saveSettingsPanel = () => {
+    updateSettings("dark_mode", darkMode);
+    updateSettings("ai_sensitivity", aiSensitivity);
+  };
+
+  return (
+    <div className="p-4">
+      <h2 className="font-bold mb-2">Settings</h2>
+      <div className="mb-2">
+        <label>Dark Mode</label>
+        <input type="checkbox" checked={darkMode} onChange={e => setDarkMode(e.target.checked)} className="ml-2"/>
+      </div>
+      <div className="mb-2">
+        <label>AI Sensitivity</label>
+        <select value={aiSensitivity} onChange={e => setAiSensitivity(e.target.value)} className="ml-2 border p-1 rounded">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <button className="bg-green-500 text-white p-2 rounded" onClick={saveSettingsPanel}>Save Settings</button>
+    </div>
+  );
+}
+
+client/components/Notifications.tsx
+import { ToastProvider, useToast } from "sonner";
+
+export function NotificationsWrapper({ children }: { children: React.ReactNode }) {
+  return <ToastProvider>{children}</ToastProvider>;
+}
+
+export function useNotify() {
+  const toast = useToast();
+  return {
+    success: (msg: string) => toast.success(msg),
+    error: (msg: string) => toast.error(msg),
+  };
+}
+
+client/components/Sidebar.tsx
+import { Link, useLocation } from "react-router-dom";
+
+export default function Sidebar() {
+  const loc = useLocation().pathname;
+  const items = ["dashboard", "rules", "settings", "help"];
+
+  return (
+    <div className="w-48 bg-gray-800 text-white min-h-screen p-4">
+      {items.map(item => (
+        <Link key={item} to={`/${item}`} className={`block p-2 rounded hover:bg-gray-700 ${loc === `/${item}` ? "bg-gray-600" : ""}`}>
+          {item.charAt(0).toUpperCase() + item.slice(1)}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+client/components/Header.tsx
+import { useState } from "react";
+
+export default function Header() {
+  const [search, setSearch] = useState("");
+  return (
+    <header className="p-4 bg-gray-900 text-white flex justify-between items-center">
+      <h1 className="font-bold text-lg">Knoux Duplicate AI</h1>
+      <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..." className="p-1 rounded"/>
+    </header>
+  );
+}

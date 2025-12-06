@@ -1,0 +1,124 @@
+Full Request for Knoux Duplicate App – Work on Existing Project Only
+
+Important Note:
+Do NOT create a new application from scratch. This task is to enhance and complete the existing Knoux Duplicate project only. All changes must be applied on the current project files. All features, UI, and EXE build must be completed without removing or replacing existing functionality.
+
+1. Compatibility & File Integrity
+
+Verify that all existing files (JS, TS, React components, assets) are fully compatible.
+
+Check for any missing or conflicting dependencies.
+
+Ensure that package.json, pnpm-lock.yaml, and node_modules are correctly aligned with the current project.
+
+Confirm that all existing services work individually and together.
+
+The EXE build must reflect the current project with all enhancements included.
+
+2. Project Setup & Build
+
+Stop any running dev processes of the existing project.
+
+Clean temporary or cache files without deleting main source files.
+
+Automatically:
+
+Check and install Node.js, npm, pnpm if missing.
+
+Approve all necessary build scripts for dependencies like @swc/core, electron, sharp.
+
+Install all dependencies using pnpm.
+
+Run dev mode to verify existing features work correctly.
+
+Build EXE output using electron-builder.
+
+Ensure no manual intervention is required from the user.
+
+3. UI/UX Enhancements
+
+Splash Screen (Animated & Premium):
+
+Fade-in logo animation, subtle zoom or rotation.
+
+Duration: 2–4 seconds (skippable optional).
+
+Elegant gradient or subtle particle animation background.
+
+Main Interface Enhancements:
+
+Maintain existing layout but enhance visuals:
+
+Smooth transitions between pages.
+
+Buttons with hover animations.
+
+Premium typography and color scheme.
+
+Subtle shadows, glows, micro-interactions.
+
+Optional: Dark/Light mode toggle.
+
+Maintain all existing functionality.
+
+4. Feature Verification
+
+Test each existing feature individually.
+
+Verify integration between features is intact.
+
+Check Electron main and renderer processes communicate properly.
+
+Confirm all APIs, AI services, or multimedia features work.
+
+Ensure EXE file runs correctly with all features functional.
+
+5. Contact Page (Enhanced)
+
+Add a fully functional contact page without affecting existing pages.
+
+Include:
+
+Eng / Sadek elgazar
+Tel & WhatsApp: +971503281920
+Email: knouxops@gmail.com
+
+Features:
+
+Each contact method has an icon.
+
+Clicking WhatsApp opens a chat with the number.
+
+Clicking Email opens the default mail client.
+
+Layout matches premium theme.
+
+Subtle animation for links on click.
+
+6. Final Checks & Deployment
+
+Verify EXE is produced in the dist folder.
+
+Ensure Splash Screen animation works correctly.
+
+Test all existing features in the EXE.
+
+Test Contact page links and icons.
+
+Confirm no errors or missing files.
+
+Maintain all current project functionality; no feature should be removed or replaced.
+
+7. Instructions for Developer/AI
+
+Work only on the existing project, do not create a new one.
+
+Apply premium Splash Screen and interface improvements.
+
+Implement Contact Page with icons and proper links.
+
+Verify every feature works individually and integrated.
+
+Build EXE output automatically, reflecting current project plus enhancements.
+
+Deliver a ready-to-run EXE with all enhancements applied.

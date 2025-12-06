@@ -1,0 +1,247 @@
+# =====================================================
+# Knoux AI Duplicate – Full Services + Example Execution
+# =====================================================
+Title: Knoux AI Duplicate – Full Service Implementation & Verification
+
+Description:
+AI Builder must review, verify, and fully execute **all services** of Knoux AI Duplicate, ensuring **real functionality**. 
+No placeholders, all services must run offline, and Arabic language must be applied throughout. 
+
+Each service below contains **example/test instructions** for Builder to execute.
+
+# =====================================================
+# 1️⃣ Dashboard Services
+# =====================================================
+# Service: Total Files Count
+Example:
+- Add 5 test files to H:\KnouxDuplicateAI\Test
+- Confirm dashboard shows "مجموع الملفات: 5"
+- Verify update after deleting 1 file → should show 4
+
+# Service: Duplicates Found
+Example:
+- Place 2 duplicate images in Test folder
+- Confirm dashboard shows "المكررات المكتشفة: 2"
+- Test AI detection vs hash detection
+
+# Service: Duplicate Copies Detected
+Example:
+- 3 duplicate groups with 12 files total
+- Confirm dashboard shows "نسخ مكررة مكتشفة: 12"
+
+# Service: Total Size & Possible Savings
+Example:
+- Duplicate files total 15 MB
+- Confirm dashboard shows "حجم الملفات المكررة: 15 MB"
+- Confirm "المساحة الممكن استرجاعها" = sum of duplicate copies - one copy per group
+
+# Service: Storage Efficiency
+Example:
+- Total files 150 MB, duplicates 15 MB → efficiency 10%
+- Confirm dashboard displays "الكفاءة التخزينية: 10%"
+
+# Service: File Type Distribution
+Example:
+- 3 images, 2 documents, 2 videos → dashboard updates dynamically with Arabic labels
+
+# Service: Quick Tips
+Example:
+- Click 'بدء الفحص' → triggers scan
+- Verify AI Smart Detection tip shows correct AI usage description
+- Confirm Safe Deletion tip moves files to Safe Trash, not permanent delete
+
+# =====================================================
+# 2️⃣ Scan Services
+# =====================================================
+# Service: Folder Selection
+Example:
+- Drag & drop H:\KnouxDuplicateAI\Test
+- Confirm folder path appears in scan list
+- Check persistence in Settings.json
+
+# Service: File Type Selection
+Example:
+- Enable JPG, PNG, PDF, MP3
+- Confirm scan only processes these file types
+
+# Service: AI Sensitivity Level
+Example:
+- Test Low: only exact duplicates detected
+- Test Medium: minor variations detected
+- Test High: all possible duplicates detected
+
+# Service: Scan Execution
+Example:
+- Start scan on Test folder
+- Confirm progress bar works
+- Validate duplicate groups created in backend
+
+# Service: Scan Results Display
+Example:
+- Check thumbnails for images
+- Preview documents
+- Side-by-side compare duplicates
+
+# =====================================================
+# 3️⃣ AI Services
+# =====================================================
+# Service: AI Duplicate Detection Engine
+Example:
+- Test image duplicates: different resolutions
+- Test document duplicates: scanned PDF vs original DOCX
+- Test audio duplicates: MP3 vs WAV same content
+
+# Service: AI Smart Suggestions
+Example:
+- Verify highest quality image suggested to keep
+- Verify newest document suggested
+- Check offline learning updates suggestions over time
+
+# Service: AI Summarizer
+Example:
+- Generate summary for duplicate PDF document
+- Verify summary matches actual content
+
+# Service: Version Detection
+Example:
+- Place old and new versions of document
+- Verify AI suggests keeping newest
+
+# =====================================================
+# 4️⃣ Rules & Batch Actions
+# =====================================================
+# Service: Rule Creation
+Example:
+- Create rule: Keep Largest Images
+- Create rule: Keep Newest Documents
+- Confirm rules listed in Rules Panel
+
+# Service: Rule Application
+Example:
+- Apply rules to detected duplicates
+- Verify correct files are marked for deletion or Safe Trash
+
+# Service: Drag & Drop Interface
+Example:
+- Drag rule "Keep Largest Images" onto image duplicates group
+- Verify backend applies rule automatically
+
+# =====================================================
+# 5️⃣ Settings Services
+# =====================================================
+# Service: General Settings
+Example:
+- Set AI Sensitivity to High
+- Enable Arabic language
+- Confirm changes saved and persist on restart
+
+# Service: Theme & Colors
+Example:
+- Toggle Dark Mode
+- Change Primary Color to #6a0dad
+- Verify UI updates instantly
+
+# Service: Safety & Trash
+Example:
+- Enable Safe Trash
+- Delete 1 duplicate → confirm file in Safe Trash
+- Restore file → verify restored to original location
+
+# Service: Settings Persistence
+Example:
+- Modify multiple settings
+- Close app → reopen → confirm settings intact
+
+# =====================================================
+# 6️⃣ Safe Trash Services
+# =====================================================
+# Service: Move to Safe Trash
+Example:
+- Select duplicate files
+- Move to Safe Trash
+- Verify files exist in Safe Trash folder
+
+# Service: Permanent Deletion
+Example:
+- Permanently delete file from Safe Trash
+- Confirm space reclaimed
+- Confirm dashboard updates
+
+# =====================================================
+# 7️⃣ Backend Modules
+# =====================================================
+# Module: File Scanner
+Example:
+- Scan folder H:\KnouxDuplicateAI\Test
+- Verify all files indexed correctly
+
+# Module: Duplicate Detection Engine
+Example:
+- Run both Hash and AI detection
+- Confirm duplicate groups returned with similarity scores
+
+# Module: Smart Suggestion Engine
+Example:
+- Generate suggestion for each duplicate group
+- Verify correctness offline
+
+# Module: Safe Delete Module
+Example:
+- Move duplicates to Safe Trash
+- Test restore & permanent deletion
+
+# Module: AI Embedding & Summarizer
+Example:
+- Summarize document duplicates
+- Check offline AI embeddings for similarity detection
+
+# Module: Version Detection Engine
+Example:
+- Detect older/newer versions
+- Confirm correct suggestion for keeping newest
+
+# Module: Batch Processing Engine
+Example:
+- Apply rules automatically
+- Verify logs of actions
+
+# =====================================================
+# 8️⃣ End-to-End Execution Workflow
+# =====================================================
+1. Launch application → Splash → Dashboard (Arabic)
+2. Select folders → Select file types → Set AI Sensitivity
+3. Start scan → Monitor progress bar
+4. Verify duplicates detected accurately
+5. Preview & Compare → Use AI suggestions
+6. Apply Rules → Verify Safe Trash functionality
+7. Adjust Settings → Theme, AI Sensitivity, Notifications → Re-scan
+8. Confirm Dashboard updates statistics correctly
+9. Test offline operation for all modules
+10. Ensure Arabic labels are applied throughout
+
+# =====================================================
+# 9️⃣ Execution Instructions
+# =====================================================
+⚠️ AI Builder must:
+- Execute **each service individually**.
+- Confirm **UI + Backend + AI** are fully functional.
+- Validate **Settings.json persistence**.
+- Test **Safe Trash & permanent deletion**.
+- Verify **all statistics, charts, heatmaps, file type distribution**.
+- Confirm **Arabic language** is applied.
+- Ensure **offline-only operation**.
+- Generate detailed report if any service fails or is incomplete.
+
+# =====================================================
+# 10️⃣ Service Execution Template (Repeatable)
+# =====================================================
+# خدمة: (اسم الخدمة)
+1. تحقق من وجود الكود الأساسي.
+2. تحقق من Backend حقيقي.
+3. تحقق من UI المرتبطة بالخدمة.
+4. شغّل الخدمة على بيانات اختبار.
+5. أصلح أي أخطاء أو أكمل أي نقص.
+6. اربط أي AI أو خوارزمية مطلوبة.
+7. تحقق من تحديث الإحصائيات والنتائج.
+8. تأكد من حفظ كل الإعدادات بشكل دائم.
+9. كرر الاختبار لضمان النجاح الكامل.

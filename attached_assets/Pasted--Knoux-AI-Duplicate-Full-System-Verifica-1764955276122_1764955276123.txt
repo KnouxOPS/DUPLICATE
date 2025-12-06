@@ -1,0 +1,161 @@
+# =====================================================
+# Knoux AI Duplicate – Full System Verification & Implementation
+# =====================================================
+Title: Knoux AI Duplicate – Complete Feature and Service Review
+
+Description:
+The AI Builder must review, verify, and ensure **every detail of Knoux AI Duplicate Desktop Application** is fully functional, offline, and in Arabic. 
+All services, modules, UI elements, settings, and backend functionalities must exist and work exactly as described, with **no placeholders, dummy content, or unimplemented features**. 
+Test every feature, every button, every statistic, and every workflow end-to-end.
+
+# =====================================================
+# 1️⃣ Dashboard Review
+# =====================================================
+- Verify Dashboard header displays Arabic and English: 
+  - "Knoux AI Duplicate"
+  - "Monitor your system's duplicate files at a glance"
+- Ensure panels display accurate statistics:
+  - Total Files (مجموع الملفات)
+  - Across all folders (عبر جميع المجلدات)
+  - Duplicates Found (الملفات المكررة)
+  - Duplicate copies detected (نسخ مكررة مكتشفة)
+  - Total Size (الحجم الإجمالي)
+  - Possible savings (المساحة الممكن توفيرها)
+  - Storage Efficiency (الكفاءة التخزينية)
+- Confirm File Type Distribution updates correctly:
+  - Images (صور)
+  - Videos (فيديو)
+  - Documents (مستندات)
+  - Audio (صوتيات)
+- Verify Quick Tips section is present and guides the user in Arabic:
+  - Start a Scan → "انقر على 'Scan Now' لبدء البحث عن الملفات المكررة"
+  - AI Smart Detection → "استخدام الذكاء الاصطناعي للكشف عن التكرارات الحقيقية"
+  - Safe Deletion → "نقل الملفات إلى سلة آمنة قبل الحذف النهائي"
+  - Batch Actions → "إنشاء قواعد تلقائية لإدارة الملفات المكررة"
+
+# =====================================================
+# 2️⃣ Onboarding / Step-by-Step Setup
+# =====================================================
+1. **Step 1 – Select Folders to Scan**
+   - Verify user can browse, drag & drop folders.
+   - Ensure sample path works: e.g., C:\Users\Documents
+   - Buttons Back / Skip / Next function correctly in Arabic.
+
+2. **Step 2 – Select File Types**
+   - Check enable/disable functionality for:
+     - JPG, PNG Images
+     - MP4, MKV, AVI Videos
+     - MP3, WAV, FLAC Audio
+     - PDF, Word, Excel Documents
+   - Ensure selections persist and are applied in scan.
+
+3. **Step 3 – AI Sensitivity Level**
+   - Validate Low / Medium / High sensitivity levels work:
+     - Low → finds only obvious duplicates
+     - Medium → balanced detection and accuracy
+     - High → finds all possible duplicates, AI may include false positives
+   - Verify setting is saved and adjustable anytime in Settings.
+
+# =====================================================
+# 3️⃣ Scan & Results
+# =====================================================
+- Conduct full scan across all selected folders and file types.
+- Verify results display correctly:
+  - Total Duplicates (إجمالي النسخ المكررة)
+  - Total Size (الحجم الإجمالي)
+  - Can Recover (المساحة الممكن استرجاعها)
+- Confirm Duplicate Groups are grouped and labeled correctly:
+  - Image Duplicates
+  - Document Duplicates
+  - Video Duplicates
+  - Audio Duplicates
+- Ensure previews for all file types:
+  - Side-by-side comparison for images
+  - Playable preview for videos
+  - AI-generated summary for documents
+  - Audio playback for audio files
+- Test Safe Trash: selected files moved to Knoux Safe Trash and can be restored.
+
+# =====================================================
+# 4️⃣ Rules & Batch Actions
+# =====================================================
+- Verify creation of rules and automation:
+  - Keep Largest Images → deletes smaller duplicates
+  - Keep Newest Documents → keeps most recent versions
+- Ensure rules applied during or after scanning.
+- Verify rules summary shows correct applied rules in Arabic.
+- Test Drag & Drop functionality for assigning rules.
+
+# =====================================================
+# 5️⃣ Settings & Customization
+# =====================================================
+- Verify General Settings:
+  - Scan Folders → add, remove, modify folders
+  - File Types → enable/disable types
+  - Language → Arabic is applied
+  - AI Sensitivity → saved and functional
+  - Show Notifications → works
+- Theme & Colors:
+  - Light / Dark Mode toggle works
+  - Primary, Secondary, Highlight, Background colors applied correctly
+- Safety & Trash:
+  - Safe Trash Enabled → files moved before permanent deletion
+  - Benefits visible to user (Recover files, Review, Organize)
+- Confirm settings persist in **Settings.json** and applied immediately.
+
+# =====================================================
+# 6️⃣ Backend Modules Verification
+# =====================================================
+- File Scanner:
+  - Scans selected folders recursively
+  - Detects all supported file types
+- Duplicate Detection Engine:
+  - Hash-based (MD5/SHA256) detection
+  - AI-based content recognition for images, audio, and documents
+- Smart Suggestion Engine:
+  - Picks best version based on quality, size, date, AI analysis
+- Safe Trash Module:
+  - Moves files safely
+  - Restores files if needed
+- AI Summarizer:
+  - Generates accurate summaries of documents
+- Version Detection:
+  - Correctly identifies older vs newer versions
+- Batch Processing Engine:
+  - Applies rules automatically with no user intervention
+- Offline Learning:
+  - AI suggestion engine improves over time without Internet
+
+# =====================================================
+# 7️⃣ End-to-End Test Workflow
+# =====================================================
+1. Launch application → Splash Screen → Dashboard in Arabic
+2. Select folders → choose file types → set AI sensitivity
+3. Click Scan Now → verify scanning progress
+4. Review duplicates → previews → AI suggestions
+5. Apply Rules & Batch Actions → verify automated selections
+6. Select files for deletion → move to Safe Trash → confirm recoverability
+7. Adjust Settings → theme, AI sensitivity, notifications → re-scan
+8. Validate all statistics and distribution update correctly
+9. Test Dark/Light mode toggle, hover effects, drag & drop, color coding, and animations
+10. Confirm offline operation with no Internet dependency
+
+# =====================================================
+# Emphasize Execution
+# =====================================================
+⚠️ The AI Builder must:
+- Review **every dashboard element, scan panel, and settings page**.
+- Test **all features fully**: Scan Engine, AI Duplicate Detection, Smart Suggestions, Batch Rules, Safe Trash, Previews, Summaries, Version Detection.
+- Ensure **all modules exist, are functional, and real**, no placeholders.
+- Confirm **Arabic language is applied throughout**.
+- Validate **statistics, file type distribution, and storage efficiency**.
+- Test **end-to-end workflow** multiple times for correctness.
+- Verify **offline operation** with all features active and working.
+
+# =====================================================
+# Outcome
+# =====================================================
+The AI Builder will generate:
+- Full review report of missing or non-functional features
+- Corrections/fixes for any placeholder or incomplete modules
+- A fully operational Knoux AI Duplicate Desktop App ready to run offline on partition H

@@ -1,0 +1,254 @@
+Knoux Duplicate AI – Builder.io Full Instruction Prompt
+=====================================================
+
+Attention Builder.io:
+هذا التوجيه كامل لإنشاء مشروع Knoux Duplicate AI على H:\KnouxDuplicateAI. اتبع التعليمات بدقة، واملأ كل الملفات والموديولات بالوظائف المطلوبة. المشروع يجب أن يكون جاهز للتشغيل كامل، Offline، مع جميع الخدمات والواجهات الأساسية والموديولات.
+
+1️⃣ المجلدات والمسارات:
+
+Frontend:
+
+client/screens/
+  SplashScreen.tsx
+  Onboarding.tsx
+  Dashboard.tsx
+  ScanResults.tsx
+
+client/components/
+  PreviewCompare.tsx
+  RulesPanel.tsx
+  SettingsPanel.tsx
+  FileCard.tsx
+  Sidebar.tsx
+  Header.tsx
+  Notifications.tsx
+
+
+Backend:
+
+server/
+  node-build.ts        ← entry point
+  scanner.ts           ← scan folders, classify files
+  duplicateEngine.ts   ← hash + AI similarity detection
+  smartSuggest.ts      ← AI recommendation best file
+  batchRules.ts        ← apply rules on duplicates
+  safeTrash.ts         ← safe deletion & restore
+  previewEngine.ts     ← previews of images/videos/docs
+  logger.ts            ← logging system
+
+
+Shared:
+
+shared/
+  constants.ts
+  utils.ts
+  settingsManager.ts
+
+
+Config & Assets:
+
+config/Settings.json  ← connect modules
+assets/logo.svg
+assets/icons/*        ← images/icons/audio/video/documents
+assets/animations/*   ← Splash/Onboarding animations
+
+2️⃣ Frontend Instructions (React + Tailwind + Framer Motion)
+SplashScreen.tsx
+
+اعرض شعار المشروع + tagline: "الذكاء في التنظيم، لا للتكرار"
+
+أضف progress bar متحرك 2-3 ثواني
+
+بعد انتهاء progress bar، انتقل تلقائيًا إلى Onboarding
+
+Onboarding.tsx
+
+خطوات:
+
+اختيار المجلدات
+
+اختيار أنواع الملفات
+
+شرح AI Smart Suggestion
+
+أضف أزرار: Next / Skip مع تأثير Hover
+
+احفظ الإعدادات في Settings.json
+
+Dashboard.tsx
+
+Sidebar مع روابط: Dashboard / Scan Now / Rules / Settings / Help
+
+عرض Stats: إجمالي الملفات، duplicates، recoverable size
+
+زر Scan Now لتشغيل backend scan
+
+صناديق ملونة حسب نوع الملفات
+
+ScanResults.tsx
+
+عرض Smart Groups للتكرارات
+
+Side panel للمعاينة والمقارنة
+
+أزرار: Keep / Delete / Move to Safe Trash
+
+Filter & Sort: size, date, quality
+
+PreviewCompare.tsx
+
+للصور: عرض جنبًا إلى جنب + Highlight للفروقات
+
+للفيديو: تشغيل مصغر
+
+للمستندات: عرض نص + AI summary
+
+أزرار Keep / Delete / Move
+
+RulesPanel.tsx
+
+إنشاء قواعد Drag & Drop
+
+أنواع القواعد: Keep latest / Keep highest quality / Auto-delete small files
+
+تطبيق القواعد على مجموعات أو كل duplicates
+
+SettingsPanel.tsx
+
+Theme toggle Dark/Light
+
+AI sensitivity slider
+
+File type selection
+
+حفظ التغييرات في Settings.json
+
+Notifications.tsx
+
+عرض toast messages لكل action (delete, restore, error)
+
+استخدم Radix Toast + Framer Motion
+
+Sidebar.tsx + Header.tsx + FileCard.tsx
+
+Sidebar: Navigation
+
+Header: شعار + Theme toggle
+
+FileCard: تفاصيل الملف + أزرار Quick Action
+
+3️⃣ Backend Instructions (Node + TypeScript)
+scanner.ts
+
+امسح كل المسارات في Settings.json
+
+صنف الملفات حسب type, size, date
+
+أرجع النتائج للـ Frontend
+
+duplicateEngine.ts
+
+استخدم hash-based detection: md5 + sha256
+
+AI similarity engine للمحتوى
+
+أرجع Smart Groups للتكرارات
+
+smartSuggest.ts
+
+حدد أفضل ملف للاحتفاظ به بناءً على quality, size, date, AI analysis
+
+دعم التعلم offline لتطوير الاقتراحات
+
+batchRules.ts
+
+طبق قواعد auto-delete أو keep
+
+ربط مع safeTrash module
+
+safeTrash.ts
+
+نقل الملفات المحذوفة لمجلد Knoux Safe Trash
+
+السماح بالاستعادة قبل الحذف النهائي
+
+تسجيل جميع العمليات
+
+previewEngine.ts
+
+إنشاء thumbnails
+
+معاينات الفيديو المصغرة
+
+استخراج نصوص المستندات + AI summarization
+
+logger.ts
+
+تسجيل كل عمليات scan, actions, errors
+
+حفظها في مجلد logs محلي
+
+node-build.ts
+
+نقطة البداية: استدعي كل modules backend
+
+تأكد من تشغيل الخادم Express وتوصيل Frontend
+
+جاهز لبناء EXE/DMG
+
+4️⃣ Shared Modules Instructions
+constants.ts
+
+جميع الثوابت: file types, colors, default paths
+
+utils.ts
+
+دوال مساعدة: read/write Settings.json, format sizes, compare files
+
+settingsManager.ts
+
+loadSettings()
+
+saveSettings()
+
+updateSettings(key, value)
+
+5️⃣ Config Settings.json Example
+{
+  "scan_paths": ["H:\\KnouxDuplicateAI\\Files"],
+  "file_types": ["jpg","png","mp4","mp3","pdf","docx","xlsx"],
+  "ai_sensitivity": "high",
+  "auto_delete_rules": [
+    {"type": "image", "keep": "highest_quality"},
+    {"type": "document", "keep": "latest"}
+  ],
+  "trash_enabled": true,
+  "dark_mode": true,
+  "theme_colors": {
+    "primary": "#6a0dad",
+    "secondary": "#ffffff",
+    "highlight": "#ffcc00",
+    "background": "#1e1e1e"
+  },
+  "language": "ar"
+}
+
+6️⃣ Additional Instructions
+
+استخدم aliases من vite.config.js: @ -> client, @shared -> shared
+
+تكامل مع TailwindCSS + tailwind-merge + framer-motion
+
+كل الملفات TypeScript
+
+Offline بالكامل
+
+ربط كل الموديولات ببعضها
+
+استخدام assets/icons لتمثيل أنواع الملفات
+
+تأثيرات hover + smooth animations
+
+جاهز EXE/DMG
+
+تحسين للأداء مع ملفات ومجلدات كبيرة

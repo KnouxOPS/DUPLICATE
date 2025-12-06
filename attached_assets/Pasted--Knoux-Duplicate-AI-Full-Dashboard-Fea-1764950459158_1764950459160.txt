@@ -1,0 +1,111 @@
+# =====================================================
+# Knoux Duplicate AI – Full Dashboard & Feature Review
+# =====================================================
+Title: Knoux Duplicate AI – Complete System Verification
+
+Description:
+Review and verify **every detail** of the Knoux Duplicate AI Desktop Application, focusing on the Dashboard, all features, and backend services. 
+Ensure **Arabic language is applied everywhere**, all services are functional, no placeholders exist, and all modules work offline. 
+Test the app end-to-end including scanning, duplicate detection, AI suggestions, batch rules, safe trash, settings, previews, and file type handling.
+
+# =====================================================
+# Dashboard Verification
+# =====================================================
+- Confirm Dashboard displays Arabic labels and text for:
+  - Total Files (مجموع الملفات)
+  - Across all folders (عبر جميع المجلدات)
+  - Duplicates Found (الملفات المكررة)
+  - Duplicate copies detected (نسخ مكررة مكتشفة)
+  - Total Size (الحجم الإجمالي)
+  - Possible savings (المساحة الممكن توفيرها)
+  - Storage Efficiency (الكفاءة التخزينية)
+  - No duplicates yet (لا توجد ملفات مكررة بعد)
+  - File Type Distribution (توزيع الملفات حسب النوع)
+- Verify statistics update correctly after scans.
+
+# =====================================================
+# Quick Tips & Guidance
+# =====================================================
+- Ensure "Start Scan" / "Scan Now" works correctly.
+- Verify AI Smart Detection finds true duplicates (not just by name).
+- Confirm Safe Deletion moves files to Knoux Safe Trash before permanent removal.
+- Check Batch Actions:
+  - Create automated rules (Keep Largest Images, Keep Newest Documents)
+  - Rules are applied during or after scanning
+  - Rules summary displays correctly in Arabic
+
+# =====================================================
+# Scan & Results Verification
+# =====================================================
+- Conduct a full scan across all selected folders and file types:
+  - Images: JPG, PNG, GIF
+  - Videos: MP4, MKV, AVI
+  - Audio: MP3, WAV, FLAC
+  - Documents: PDF, Word, Excel
+- Confirm Scan Results display:
+  - Number of duplicate groups
+  - Total Duplicates
+  - Total Size
+  - Can Recover space
+  - File Type Duplicates breakdown with size and recoverable space
+- Test Preview & Compare for each file type:
+  - Images: side-by-side preview and quality analysis
+  - Videos: playable preview
+  - Documents: AI summary preview
+- Ensure 0 files selected for deletion initially and user can select files manually.
+
+# =====================================================
+# Rules & Batch Actions Verification
+# =====================================================
+- Verify rules creation:
+  - Keep Largest Images → deletes smaller duplicates
+  - Keep Newest Documents → keeps most recent versions
+- Test applying rules to duplicates:
+  - Check files automatically selected for deletion according to rules
+- Confirm deletion moves files to Safe Trash
+- Ensure rules summary updates correctly in Arabic
+
+# =====================================================
+# Settings & Customization
+# =====================================================
+- Confirm Settings panel:
+  - Scan Folders selection works
+  - File Types selection works
+  - Theme & Colors are applied
+  - Dark/Light Mode toggle functions
+  - Safety & Trash options are configurable
+- Validate changes in Settings.json are reflected in the app immediately
+
+# =====================================================
+# Backend & Modules Verification
+# =====================================================
+- Test File Scanner for all file types and folder structures
+- Verify Duplicate Detection Engine identifies all duplicates
+- Confirm Smart Suggestion Engine selects the best version accurately
+- Ensure Safe Trash module works offline
+- Test AI Summarizer produces correct summaries for documents
+- Confirm Version Detection identifies older/newer versions
+- Verify offline operation for all features
+
+# =====================================================
+# Full System End-to-End Test
+# =====================================================
+1. Open application → Splash → Dashboard in Arabic
+2. Select folders and file types → Scan Now
+3. Review duplicates and Smart Suggestions
+4. Apply batch rules / delete / move to Safe Trash
+5. Preview files and summaries for all types
+6. Adjust settings → re-scan → validate statistics update
+7. Confirm all UI elements, hover effects, drag & drop, animations, and color-coded file types work as expected
+8. Ensure offline operation, no placeholders, and no missing functionality
+
+# =====================================================
+# Emphasize Execution
+# =====================================================
+⚠️ The AI Builder or reviewer must:
+- Review **every UI element and Dashboard detail**.
+- Test **all features fully**, including scan, duplicate detection, AI analysis, batch rules, safe trash, previews, and settings.
+- Ensure **Arabic language is applied everywhere**.
+- Validate all **backend modules** and offline functionality.
+- Confirm **statistics, file type distribution, and recoverable space** update correctly.
+- Identify and fix **any missing or placeholder elements** immediately.
